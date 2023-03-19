@@ -1,3 +1,5 @@
+
+
 let ball = document.getElementById('ball');
 let block = document.getElementById('block');
 
