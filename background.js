@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 const canvasWidth = 1000;
 const canvasHeight = 250;
 
-let gameSpeed = 1;
+let gameSpeed = 10;
 
 const background1 = new Image();
 background1.src = "background/1.png";
@@ -19,7 +19,7 @@ class BackgroundLayer {
     this.x = 0;
     this.y = 0;
     this.width = 1000;
-    this.canvasHeight = 250;
+    this.height = 250;
     this.x1 = this.width;
     this.image = image;
     this.speedMod = speedMod;
@@ -45,18 +45,19 @@ class BackgroundLayer {
   }
 }
 
-const layer1 = new BackgroundLayer(background1, 0.1);
-const layer2 = new BackgroundLayer(background2, 0.5);
-const layer3 = new BackgroundLayer(background3, 1);
+const layer1 = new BackgroundLayer(background1, 0.01);
+const layer2 = new BackgroundLayer(background2, 0.25);
+const layer3 = new BackgroundLayer(background3, 0.5);
 
 const backgroundObjects = [layer1, layer2, layer3];
 
+console.log(this.x);
+
 function animate() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  //   layer1.update();
+
   //   layer1.draw();
-  //   ctx.drawImage(background2, x, 2);
-  //   ctx.drawImage(background3, x, 3);
+  //   layer1.update();
 
   backgroundObjects.forEach((obj) => {
     obj.update();
