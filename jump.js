@@ -21,39 +21,6 @@ const pauseGame = () => {
   });
 };
 
-// random blocks
-
-const numero = 3000;
-const numbersArray = [];
-let blockNumber = math.floor(Math.random() * 4);
-
-class enemyBlocks {
-  // give this block the properties
-  constructor() {
-    this.block_x = 25;
-    this.block_y = 25;
-    this.top = 160;
-    this.x = 1000;
-    this.y = 0;
-    this.topPosition = 160;
-  }
-
-  update() {
-    this.x--;
-    if (this.x > -50) {
-      this.x = 100;
-    }
-  }
-
-  draw() {}
-}
-
-for (let i = 0; i < numero; i++) {
-  numbersArray.push(new enemyBlocks());
-}
-
-console.log(numbersArray);
-
 // collision
 
 const check = setInterval(() => {
