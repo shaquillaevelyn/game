@@ -6,13 +6,13 @@ const canvasHeight = 250;
 let gameSpeed = 10;
 
 const background1 = new Image();
-background1.src = "background/1.png";
+background1.src = "parallax/background/1.png";
 
 const background2 = new Image();
-background2.src = "background/2.png";
+background2.src = "parallax/background/2.png";
 
 const background3 = new Image();
-background3.src = "background/3.png";
+background3.src = "parallax/background/3.png";
 
 class BackgroundLayer {
   constructor(image, speedMod) {
