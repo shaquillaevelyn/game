@@ -8,8 +8,16 @@ CANVAS_HEIGHT = canvas.height = 1000;
 const numberOfBlocks = 6;
 const blocksArray = [];
 
+
+class Game{
+  constructor() {
+    this.enemies = [];
+  }
+}
+
 class Enemy {
   constructor() {
+
     this.x = 1000;
     this.y = 500;
     this.width = 25;
@@ -25,6 +33,11 @@ class Enemy {
   draw() {
     ctx.fillRect(this.x, this.y, this.width * blockNumber, this.height);
   }
+
+  // private method
+  #addNewEnemy() {
+    
+  }
 }
 
 // break it down
@@ -36,19 +49,23 @@ class Enemy {
 
 for (let i = 0; i < numberOfBlocks; i++) {
   blockNumber = Math.ceil(Math.random() * 3);
-
   blocksArray.push(new Enemy());
-  console.log(blockNumber);
+
 }
+
+
 
 console.log(blocksArray);
 function animate() {
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
   blocksArray.forEach((block) => {
-    block.move();
+   block.move();
     block.draw();
-  });
-  requestAnimationFrame(animate);
+}),
+
+    
+requestAnimationFrame(animate);
+
 }
+
 animate();
