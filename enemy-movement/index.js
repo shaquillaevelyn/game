@@ -1,7 +1,7 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-CANVAS_WIDTH = canvas.width = 1000;
-CANVAS_HEIGHT = canvas.height = 1000;
+// const canvas = document.getElementById("canvas");
+// const ctx = canvas.getContext("2d");
+// CANVAS_WIDTH = canvas.width = 1000;
+// CANVAS_HEIGHT = canvas.height = 1000;
 
 // random blocks
 
@@ -9,19 +9,19 @@ const numberOfBlocks = 6;
 const blocksArray = [];
 
 
-class Game{
-  constructor() {
-    this.enemies = [];
-  }
-}
+// class Game{
+//   constructor() {
+//     this.enemies = [];
+//   }
+// }
 
 class Enemy {
   constructor() {
-
     this.x = 1000;
     this.y = 500;
     this.width = 25;
     this.height = 25;
+    this.blockNumber = Math.floor(Math.random() * 4);
   }
 
   // can move each block in the same way
@@ -34,10 +34,10 @@ class Enemy {
     ctx.fillRect(this.x, this.y, this.width * blockNumber, this.height);
   }
 
-  // private method
-  #addNewEnemy() {
+  // // private method
+  // #addNewEnemy() {
     
-  }
+  // }
 }
 
 // break it down
