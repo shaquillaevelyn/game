@@ -8,16 +8,16 @@ class Game {
     this.enemy = [];
     this.#addEnemy();
     this.enemyInterval = 300;
-    this.enemyTimer = 0
+    this.enemyTimer = 0;
     console.log(this.enemy);
   }
 
   update() {
     if (this.enemyTimer > this.enemyInterval) {
-      this.#addEnemy()
-      this.enemyTimer = 0
+      this.#addEnemy();
+      this.enemyTimer = 0;
     } else {
-      this.enemyTimer++
+      this.enemyTimer++;
     }
 
     this.enemy.forEach((obj) => obj.update());
@@ -30,9 +30,7 @@ class Game {
 
   // private method
   #addEnemy() {
-
     this.enemy.push(new Enemy());
-
   }
 }
 
@@ -40,19 +38,16 @@ class Game {
 
 // creates new emnemy anytime I call new Enemy
 
-
 class Enemy {
   constructor() {
     this.x = 1000;
     this.y = 500;
     this.width = 25;
     this.height = 25;
-    this.blockNumber = Math.floor(Math.random() * 4);
+    this.blockNumber = Math.ceil(Math.random() * 4);
   }
-  
 
   draw() {
-
     ctx.fillRect(this.x, this.y, this.width * this.blockNumber, this.height);
   }
 
@@ -60,8 +55,6 @@ class Enemy {
     this.x--;
   }
 }
-
-
 
 const game = new Game();
 let lastTimeStamp = 1;

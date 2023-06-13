@@ -82,7 +82,3 @@ window.addEventListener("load", function () {
   const forward = bird.setAnimation(0, 10);
   const backward = bird.setAnimation(11, 21);
 });
-
-const myObject = {
-  key: value,
-};

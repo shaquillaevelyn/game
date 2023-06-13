@@ -8,7 +8,6 @@
 const numberOfBlocks = 6;
 const blocksArray = [];
 
-
 // class Game{
 //   constructor() {
 //     this.enemies = [];
@@ -36,7 +35,7 @@ class Enemy {
 
   // // private method
   // #addNewEnemy() {
-    
+
   // }
 }
 
@@ -48,24 +47,18 @@ class Enemy {
 // const block = new Enemy();
 
 for (let i = 0; i < numberOfBlocks; i++) {
-  blockNumber = Math.ceil(Math.random() * 3);
+  blockNumber = Math.ceil(Math.random() * 4);
   blocksArray.push(new Enemy());
-
 }
-
-
 
 console.log(blocksArray);
 function animate() {
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   blocksArray.forEach((block) => {
-   block.move();
+    block.move();
     block.draw();
-}),
-
-    
-requestAnimationFrame(animate);
-
+  }),
+    requestAnimationFrame(animate);
 }
 
 animate();
