@@ -44,7 +44,7 @@ class Enemy {
     this.y = 500;
     this.width = 25;
     this.height = 25;
-    this.blockNumber = Math.ceil(Math.random() * 4);
+    this.blockNumber = Math.floor(Math.random() * 4);
   }
 
   draw() {
