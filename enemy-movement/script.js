@@ -6,7 +6,7 @@ CANVAS_HEIGHT = canvas.height = 1000;
 class Game {
   constructor() {
     this.enemy = [];
-    this.#addEnemy();
+    this.addEnemy();
     this.enemyInterval = 300;
     this.enemyTimer = 0;
     console.log(this.enemy);
@@ -14,7 +14,7 @@ class Game {
 
   update() {
     if (this.enemyTimer > this.enemyInterval) {
-      this.#addEnemy();
+      this.addEnemy();
       this.enemyTimer = 0;
     } else {
       this.enemyTimer++;
@@ -29,14 +29,10 @@ class Game {
   }
 
   // private method
-  #addEnemy() {
+  addEnemy() {
     this.enemy.push(new Enemy());
   }
 }
-
-// class Bird { }
-
-// creates new emnemy anytime I call new Enemy
 
 class Enemy {
   constructor() {
