@@ -7,6 +7,11 @@ window.addEventListener("load", function () {
   // Add game here
 });
 
+const canvas = document.getElementById("cheese");
+const ctx = canvas.getContext("2d");
+const CANVAS_WIDTH = 1000;
+const CANVAS_HEIGHT = 250;
+
 let clickCount = 0;
 
 const updateScore = () => {
@@ -18,17 +23,21 @@ let scorecard = document.getElementById("scorecard");
 class Game {
   constructor() {
     // space of game area
-    this.x = 1000;
-    this.y = 250;
+    this.x = CANVAS_WIDTH;
+    this.y = CANVAS_HEIGHT;
+    // Add enemy
     this.enemy = [];
     this.addEnemy();
+    // add bird
     this.bird = [];
     this.addBird();
+    // add jumper
     this.jumper = [];
     this.addJumper();
   }
 
   draw() {
+    this.jumper.draw()
     this.enemy.forEach((obj) => obj.draw());
     this.bird.forEach((obj) => obj.draw());
   }
@@ -40,6 +49,8 @@ class Game {
   addBird() {
     this.bird.push(new Bird());
   }
+
+  
 }
 
 class Jumper {
@@ -145,4 +156,8 @@ class Bird {
     //   if (this.flightX < 1000) this.flightX++;
     //   else this.flightX--;
   }
+}
+
+function animate() {
+  cta
 }
