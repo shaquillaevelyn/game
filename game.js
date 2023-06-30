@@ -1,66 +1,58 @@
-// This game will have
-// random enemies
-// bird sprite across the top of the screen
-// parallax background
 
-window.addEventListener("load", function () {
-  // Add game here
-});
+// window.addEventListener("load", function () {
+//   // Add game here
+// });
 
-const canvas = document.getElementById("cheese");
+// Canvas Set Up
+
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const CANVAS_WIDTH = 1000;
 const CANVAS_HEIGHT = 250;
 
-let clickCount = 0;
+let score = 0;
+let gameFrame = 0;
+ctx.font = '12px Ariel'
 
-const updateScore = () => {
-  scorecard.innerHTML = clickCount;
-};
+// set 0, 0 cords within my cnavas
+let canvasPosition = canvas.getBoundingClientRect();
+console.log(canvasPosition)
 
-let scorecard = document.getElementById("scorecard");
 
-class Game {
-  constructor() {
-    // space of game area
-    this.x = CANVAS_WIDTH;
-    this.y = CANVAS_HEIGHT;
-    // Add enemy
-    this.enemy = [];
-    this.addEnemy();
-    // add bird
-    this.bird = [];
-    this.addBird();
-    // add jumper
-    this.jumper = [];
-    this.addJumper();
-  }
+// const topLeft = 
+// const topRight =
+// const bottomLeft = 
+// const bottomRight = 
 
-  draw() {
-    this.jumper.draw()
-    this.enemy.forEach((obj) => obj.draw());
-    this.bird.forEach((obj) => obj.draw());
-  }
-
-  addEnemy() {
-    this.enemy.push(new Enemy());
-  }
-
-  addBird() {
-    this.bird.push(new Bird());
-  }
-
-  
+// Click to Jump Interactivity
+const jump = {
+  x: 2,
+  y: 2,
+  height: 25,
+  width: 25,
 }
+
+canvas.addEventListener('click', function (event) {
+  
+})
+
+// Player
 
 class Jumper {
   constructor() {
     this.x = 10;
     this.y = 245;
+    this.radius = 50;
   }
 
   jump() {
-    console.log("im jumping");
+    console.log("jumping");
+    if (ball.classList !== "jump") {
+      ball.classList.add("jump");
+    }
+    setTimeout(() => {
+      ball.classList.remove("jump");
+    }, 500);
   }
 
   update() {
@@ -83,81 +75,34 @@ class Jumper {
   }
 }
 
-class Enemy {
-  constructor() {
-    this.x = 1000;
-    this.y = 500;
-    this.width = 25;
-    this.height = 25;
-    this.blockNumber = Math.floor(Math.random() * 4);
-  }
 
-  draw() {
-    ctx.fillRect(this.x, this.y, this.width * this.blockNumber, this.height);
-  }
 
-  update() {
-    this.x--;
-  }
-}
+// Enemy blocks
+// Parallax background
+// Random birds
+// Animation loop
 
-class Bird {
-  constructor(canvasWidth, canvasHeight) {
-    this.canvasWidth = canvasWidth;
-    this.canvasHeight = canvasHeight;
-    this.image = document.getElementById("bird");
-    this.spriteWidth = 190;
-    this.spriteHeight = 190;
-    this.width = this.spriteWidth;
-    this.height = this.spriteHeight;
-    this.x = 1;
-    this.y = 1;
-    this.minFrameForward = 0;
-    this.maxFrameForward = 10;
-    this.minFrameBackwards = 11;
-    this.maxFrameBackwards = 22;
-    this.frame = 0;
-    this.FrameX = 0;
-    this.FrameY = 1;
-    this.flightX = 1000;
-  }
 
-  draw(context) {
-    // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-    context.drawImage(
-      this.image,
-      this.spriteWidth * this.FrameX,
-      this.spriteHeight * this.FrameY,
-      this.spriteWidth,
-      this.spriteHeight,
-      this.x * this.flightX,
-      this.y,
-      this.width,
-      this.height
-    );
-  }
+let ball = document.getElementById("ball");
+let block = document.getElementById("block");
 
-  update() {
-    // method up to frame 10
-    this.flightX--;
+let clickCount = 0;
 
-    if (this.frame < this.maxFrameForward && this.flightX < 1000) this.frame++;
-    else this.frame = this.minFrameForward;
+const updateScore = () => {
+  scorecard.innerHTML = clickCount;
+};
 
-    this.FrameX = this.frame % 5;
+let scorecard = document.getElementById("scorecard");
 
-    // method after frame 10 to 21
 
-    //   if (this.frame < this.maxFrame) this.frame++;
-    //   else this.frame = this.minFrame;
-    //   this.FrameX = this.frame % 5;
-    //   this.FrameY = Math.floor(this.frame / 5);
 
-    //   if (this.flightX < 1000) this.flightX++;
-    //   else this.flightX--;
-  }
-}
-
+const gamey = new Game()
 function animate() {
-  cta
+  ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+  gamey.update()
+  gamey.draw()
+
+  requestAnimationFrame(animate)
 }
+animate();

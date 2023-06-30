@@ -2,20 +2,25 @@
 
 * {
     padding: 0;
-    margin: 15;
-    
+    margin: 0;   
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 canvas {
-    padding: 0;
-    margin: 15; 
-    position: absolute;
-    z-index: -3;
-    border: 5px solid black;
+    width: 1000px;
+    height: 250px;
+    border: 5px solid navy;
 }
 
 #game{
-    width: 1000px;
-    height: 250px;
+
     border: 5px solid black;
     object-fit: contain;
     background-repeat: repeat-x;
