@@ -26,52 +26,50 @@ console.log(canvasPosition)
 
 // Click to Jump Interactivity
 const jump = {
-  x: 2,
-  y: 2,
-  height: 25,
-  width: 25,
+  x: 0,
+  y: 50,
+  click: false,
 }
 
-canvas.addEventListener('click', function (event) {
-  
+canvas.addEventListener('mousedown', function (e) {
+  jump.click = true
+  jump.y = 50
+ 
 })
 
 // Player
 
 class Jumper {
-  constructor() {
-    this.x = 10;
+  constructor(game) {
+    this.game = game;
+    
+    this.x = 30;
     this.y = 245;
-    this.radius = 50;
+    this.vy = 0;
+    this.radius = 20;
   }
 
-  jump() {
-    console.log("jumping");
-    if (ball.classList !== "jump") {
-      ball.classList.add("jump");
+  update(input) {
+    let dy = this.y - jump.y;
+
+    if (this.y != dy) {
+      this.y -= dy/100
     }
-    setTimeout(() => {
-      ball.classList.remove("jump");
-    }, 500);
-  }
+    };
 
-  update() {
-    setInterval(() => {
-      let ballTop = parseInt(getComputedStyle(ball).getPropertyValue("top"));
-      let blockLeft = parseInt(
-        getComputedStyle(block).getPropertyValue("left")
-      );
-
-      if (blockLeft <= 60 && blockLeft > 0 && 165 < ballTop) {
-        block.style.animation = "none";
-        block.style.display = "none";
-        alert(`you lose- you scored ${clickCount}!`);
-        location.reload();
-      } else {
-        clickCount++;
-        updateScore();
-      }
-    }, 1);
+  draw() {
+    if (jump.click) {
+      ctx.lineWidth = 0.2;
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(this.x, jump.y);
+      ctx.stroke();
+    }
+    ctx.fillStyle = 'red'
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fill()
+    ctx.closePath()
   }
 }
 
@@ -83,25 +81,12 @@ class Jumper {
 // Animation loop
 
 
-let ball = document.getElementById("ball");
-let block = document.getElementById("block");
-
-let clickCount = 0;
-
-const updateScore = () => {
-  scorecard.innerHTML = clickCount;
-};
-
-let scorecard = document.getElementById("scorecard");
-
-
-
-const gamey = new Game()
+const jumper = new Jumper();
 function animate() {
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-  gamey.update()
-  gamey.draw()
+  jumper.update()
+  jumper.draw()
 
   requestAnimationFrame(animate)
 }
