@@ -2,6 +2,18 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const CANVAS_WIDTH = (canvas.width = 1000);
 const CANVAS_HEIGHT = (canvas.height = 250);
+let enemyArray = [];
+
+let gameSpeed = 3;
+
+const background1 = new Image();
+background1.src = "/game-one/final-game/background/1.png";
+
+const background2 = new Image();
+background2.src = "/game-one/final-game/background/2.png";
+
+const background3 = new Image();
+background3.src = "/game-one/final-game/background/3.png";
 
 class Inputs {
   constructor() {
@@ -17,24 +29,9 @@ class Inputs {
         this.keys.push(e.key);
       }
 
-      // window.addEventListener("keyup", () => {
-      //   if (
-      //     (e.key === "spacebar" ||
-      //       e.key === "ArrowLeft" ||
-      //       e.key === "ArrowRight") &&
-      //     this.keys.indexOf(e.key) > -1
-      //   ) {
-      //     this.keys.splice(this.keys.indexOf(e.key), 1);
-      //   }
-
-      //   console.log(this.keys);
-      // });
-
       window.addEventListener("keyup", (e) => {
         this.keys = [];
       });
-
-      console.log(this.keys);
     });
   }
 }
@@ -95,8 +92,6 @@ class Jumper {
     if (this.y > this.gameHeight - this.radius) {
       this.y = this.gameHeight - this.radius;
     }
-
-    console.log(this.x, this.moveX, this.y, this.moveY);
   }
 
   floor() {
@@ -107,17 +102,6 @@ class Jumper {
     } //
   }
 }
-
-let gameSpeed = 5;
-
-const background1 = new Image();
-background1.src = "/game-one/final-game/background/1.png";
-
-const background2 = new Image();
-background2.src = "/game-one/final-game/background/2.png";
-
-const background3 = new Image();
-background3.src = "/game-one/final-game/background/3.png";
 
 class Background {
   constructor(image, speedMod) {
@@ -150,6 +134,67 @@ class Background {
   }
 }
 
+class Enemy {
+  constructor(canvasWidth, canvasHeight) {
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
+    this.x = 1000;
+    this.y = 220;
+    this.width = 30;
+    this.height = 30;
+    this.blockNumberX = Math.ceil(Math.random() * 4);
+    this.blocknumberY = Math.ceil(Math.random() * 5);
+    this.delete = false;
+  }
+
+  draw(context) {
+    context.strokeStyle = "white";
+    context.fillStyle = "blue";
+    context.fillRect(
+      this.x,
+      this.y,
+      this.width * this.blockNumberX,
+      this.height * this.blocknumberY
+    );
+    context.fill();
+
+    console.log(this.blocknumberY);
+  }
+
+  update() {
+    this.x--;
+    if (this.x < 0 - this.width * this.blockNumber) this.delete = true;
+  }
+}
+
+function handleEnemy(deltaTime) {
+  if (enemyTimer > enemyInterval) {
+    enemyArray.push(new Enemy());
+    enemyTimer = 0;
+  } else {
+    enemyTimer += deltaTime;
+  }
+
+  if (enemyArray.length > 5) {
+    enemyArray.splice(0, 1);
+  }
+
+  enemyArray = enemyArray.filter((enemy) => (enemy.delete = true));
+
+  enemyArray.forEach((enemy) => {
+    enemy.draw(ctx);
+    enemy.update();
+  });
+}
+
+// function collisions() {
+//   // const collisionCheck = setInterval(() => {
+//   //   let jumperLeft = getComputedStyle(Jumper).getPropertyValue("left")
+//   //   let enemyRight = getComputedStyle(Enemy).getPropertyValue("right")
+//   // }, 1)
+//   // if (Jumper.x)
+// }
+
 const input = new Inputs();
 const jumper = new Jumper(CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -159,17 +204,24 @@ const layer3 = new Background(background3, 0.5);
 
 const backgroundObjects = [layer1, layer2, layer3];
 
-function animate() {
+let lastTime = 0;
+let enemyTimer = 0;
+let enemyInterval = 2000;
+
+function animate(timeStamp) {
+  const deltaTime = timeStamp - lastTime;
+  lastTime = timeStamp;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  backgroundObjects.map((obj) => {
-    obj.update();
-    obj.draw(ctx);
+  backgroundObjects.forEach((background) => {
+    background.draw(ctx);
+    background.update();
   });
 
   jumper.draw(ctx);
   jumper.update(input);
+  handleEnemy(deltaTime);
 
   requestAnimationFrame(animate);
 }
-animate();
+animate(0);
