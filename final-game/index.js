@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 const CANVAS_WIDTH = (canvas.width = 1000);
 const CANVAS_HEIGHT = (canvas.height = 250);
 let enemyArray = [];
+let collision = false;
 
 let gameSpeed = 3;
 
@@ -42,22 +43,38 @@ class Jumper {
     this.gameHeight = CANVAS_HEIGHT;
     this.x = 0;
     this.y = this.gameHeight - 20;
-    this.radius = 20;
+    this.height = 20;
+    this.width = 20;
 
     this.moveX = 0;
     this.moveY = 0;
 
     this.weight = 0.2;
     this.speed = 0.5;
+    this.collision = false;
   }
 
   draw(context) {
     context.fillStyle = "orange";
-    context.fillRect(this.x, this.y, this.radius, this.radius);
+    context.fillRect(this.x, this.y, this.width, this.height);
     context.fill();
   }
 
-  update(input) {
+  update(input, enemyArray) {
+    // collison
+    // this.x - this.width > enemy.x + enemy.width &&
+    //   this.y + this.height < enemy.y;
+    //  && this.y + this.height < enemy.y)
+    enemyArray.forEach((enemy) => {
+      let yCollide = this.y -
+
+      if (this.x + this.width > enemy.x) {
+        collision = true;
+        alert("game over!");
+      }
+      console.log(this.y, this.gameHeight - enemy.height);
+    });
+
     if (input.keys.indexOf("ArrowLeft") > -1) {
       this.moveX = -5;
     } else if (input.keys.indexOf("ArrowRight") > -1) {
@@ -78,8 +95,8 @@ class Jumper {
     }
 
     // right boundary
-    if (this.x > this.gameWidth - this.radius)
-      this.x = this.gameWidth - this.radius;
+    if (this.x > this.gameWidth - this.width)
+      this.x = this.gameWidth - this.weight;
 
     // jumper
     this.y += this.moveY;
@@ -89,8 +106,8 @@ class Jumper {
       this.moveY = 0;
     }
 
-    if (this.y > this.gameHeight - this.radius) {
-      this.y = this.gameHeight - this.radius;
+    if (this.y > this.gameHeight - this.height) {
+      this.y = this.gameHeight - this.height;
     }
   }
 
@@ -139,26 +156,19 @@ class Enemy {
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
     this.x = 1000;
-    this.y = 220;
-    this.width = 30;
-    this.height = 30;
+    this.y = 250;
     this.blockNumberX = Math.ceil(Math.random() * 4);
-    this.blocknumberY = Math.ceil(Math.random() * 5);
+    this.blocknumberY = Math.floor(Math.random() * -3);
+    this.width = 30 * this.blockNumberX;
+    this.height = 30 * this.blocknumberY;
     this.delete = false;
   }
 
   draw(context) {
     context.strokeStyle = "white";
     context.fillStyle = "blue";
-    context.fillRect(
-      this.x,
-      this.y,
-      this.width * this.blockNumberX,
-      this.height * this.blocknumberY
-    );
+    context.fillRect(this.x, this.y, this.width, this.height);
     context.fill();
-
-    console.log(this.blocknumberY);
   }
 
   update() {
@@ -185,6 +195,8 @@ function handleEnemy(deltaTime) {
     enemy.draw(ctx);
     enemy.update();
   });
+
+  // console.log(enemyArray);
 }
 
 // function collisions() {
@@ -219,9 +231,9 @@ function animate(timeStamp) {
   });
 
   jumper.draw(ctx);
-  jumper.update(input);
+  jumper.update(input, enemyArray);
   handleEnemy(deltaTime);
 
-  requestAnimationFrame(animate);
+  if (!collision) requestAnimationFrame(animate);
 }
 animate(0);
