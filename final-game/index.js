@@ -61,29 +61,25 @@ class Jumper {
   }
 
   update(input, enemyArray) {
-    // collison
-    // this.x - this.width > enemy.x + enemy.width &&
-    //   this.y + this.height < enemy.y;
-    //  && this.y + this.height < enemy.y)
-    enemyArray.forEach((enemy) => {
 
-        if (this.x + this.width > enemy.x && this.y > this.gameHeight + enemy.height  ||
-            this.x >  enemy.x + enemy.width &&  this.y < this.gameHeight + enemy.height ) {
-        collision = true;
-          alert("game over!");
+      enemyArray.forEach((enemy) => {
           
-      }
+          if (this.x + this.width > enemy.x &&
+              enemy.x + enemy.width > this.x &&
+              this.y + this.height > enemy.y +  enemy.height )        
+          {
+              collision = true;
+          alert("game over!"); 
+          }
         
-    // this.y ~ 230,  
-      console.log(this.y, this.x);
-    });
+     });
 
     if (input.keys.indexOf("ArrowLeft") > -1) {
       this.moveX = -5;
     } else if (input.keys.indexOf("ArrowRight") > -1) {
       this.moveX = 5;
     } else if (input.keys.indexOf("spacebar") > -1 && this.floor()) {
-      this.moveY = -10;
+      this.moveY = -8;
     } else {
       this.moveX = 0;
     }
