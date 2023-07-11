@@ -66,13 +66,16 @@ class Jumper {
     //   this.y + this.height < enemy.y;
     //  && this.y + this.height < enemy.y)
     enemyArray.forEach((enemy) => {
-      let yCollide = this.y -
 
-      if (this.x + this.width > enemy.x) {
+        if (this.x + this.width > enemy.x && this.y > this.gameHeight + enemy.height  ||
+            this.x >  enemy.x + enemy.width &&  this.y < this.gameHeight + enemy.height ) {
         collision = true;
-        alert("game over!");
+          alert("game over!");
+          
       }
-      console.log(this.y, this.gameHeight - enemy.height);
+        
+    // this.y ~ 230,  
+      console.log(this.y, this.x);
     });
 
     if (input.keys.indexOf("ArrowLeft") > -1) {
