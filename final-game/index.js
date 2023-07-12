@@ -61,18 +61,16 @@ class Jumper {
   }
 
   update(input, enemyArray) {
-
-      enemyArray.forEach((enemy) => {
-          
-          if (this.x + this.width > enemy.x &&
-              enemy.x + enemy.width > this.x &&
-              this.y + this.height > enemy.y +  enemy.height )        
-          {
-              collision = true;
-          alert("game over!"); 
-          }
-        
-     });
+    enemyArray.forEach((enemy) => {
+      if (
+        this.x + this.width > enemy.x &&
+        enemy.x + enemy.width > this.x &&
+        this.y + this.height > enemy.y + enemy.height
+      ) {
+        collision = true;
+        alert("game over!");
+      }
+    });
 
     if (input.keys.indexOf("ArrowLeft") > -1) {
       this.moveX = -5;
@@ -194,17 +192,7 @@ function handleEnemy(deltaTime) {
     enemy.draw(ctx);
     enemy.update();
   });
-
-  // console.log(enemyArray);
 }
-
-// function collisions() {
-//   // const collisionCheck = setInterval(() => {
-//   //   let jumperLeft = getComputedStyle(Jumper).getPropertyValue("left")
-//   //   let enemyRight = getComputedStyle(Enemy).getPropertyValue("right")
-//   // }, 1)
-//   // if (Jumper.x)
-// }
 
 const input = new Inputs();
 const jumper = new Jumper(CANVAS_WIDTH, CANVAS_HEIGHT);
