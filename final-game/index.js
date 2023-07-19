@@ -62,18 +62,6 @@ class Jumper {
   }
 
   update(input, enemyArray) {
-<<<<<<< HEAD
-    enemyArray.forEach((enemy) => {
-      if (
-        this.x + this.width > enemy.x &&
-        enemy.x + enemy.width > this.x &&
-        this.y + this.height > enemy.y + enemy.height
-      ) {
-        collision = true;
-        alert("game over!");
-      }
-    });
-=======
 
       enemyArray.forEach((enemy) => {
           
@@ -86,7 +74,6 @@ class Jumper {
           }
         
      });
->>>>>>> 72885f1 (update)
 
     if (input.keys.indexOf("ArrowLeft") > -1) {
       this.moveX = -5;
@@ -210,8 +197,6 @@ function handleEnemy(deltaTime) {
   });
 }
 
-<<<<<<< HEAD
-=======
 function scoreCard(context){
 
   context.font = '40px Ariel';
@@ -226,7 +211,6 @@ function scoreCard(context){
 }
 
 
->>>>>>> 72885f1 (update)
 const input = new Inputs();
 const jumper = new Jumper(CANVAS_WIDTH, CANVAS_HEIGHT);
 
