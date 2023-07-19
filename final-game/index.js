@@ -4,6 +4,7 @@ const CANVAS_WIDTH = (canvas.width = 1000);
 const CANVAS_HEIGHT = (canvas.height = 250);
 let enemyArray = [];
 let collision = false;
+let score = 0
 
 let gameSpeed = 3;
 
@@ -61,6 +62,7 @@ class Jumper {
   }
 
   update(input, enemyArray) {
+<<<<<<< HEAD
     enemyArray.forEach((enemy) => {
       if (
         this.x + this.width > enemy.x &&
@@ -71,13 +73,27 @@ class Jumper {
         alert("game over!");
       }
     });
+=======
+
+      enemyArray.forEach((enemy) => {
+          
+          if (this.x + this.width > enemy.x &&
+              enemy.x + enemy.width > this.x &&
+              this.y + this.height > enemy.y +  enemy.height )        
+          {
+              collision = true;
+          alert(`GAME OVER! You scored ${score}`); 
+          }
+        
+     });
+>>>>>>> 72885f1 (update)
 
     if (input.keys.indexOf("ArrowLeft") > -1) {
       this.moveX = -5;
     } else if (input.keys.indexOf("ArrowRight") > -1) {
       this.moveX = 5;
     } else if (input.keys.indexOf("spacebar") > -1 && this.floor()) {
-      this.moveY = -8;
+      this.moveY = -9;
     } else {
       this.moveX = 0;
     }
@@ -194,6 +210,23 @@ function handleEnemy(deltaTime) {
   });
 }
 
+<<<<<<< HEAD
+=======
+function scoreCard(context){
+
+  context.font = '40px Ariel';
+  context.fillStyle = "black";
+  context.fillText = ('Score:' + score, 20, 50)
+
+  if (collision) {
+    context.textAlign = "centre"
+    context.fillStyle = "black";
+    context.fillText = ('GAME OVER, YOU SCORED' + score, 20, 20)
+  }
+}
+
+
+>>>>>>> 72885f1 (update)
 const input = new Inputs();
 const jumper = new Jumper(CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -208,6 +241,7 @@ let enemyTimer = 0;
 let enemyInterval = 2000;
 
 function animate(timeStamp) {
+
   const deltaTime = timeStamp - lastTime;
   lastTime = timeStamp;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -221,6 +255,10 @@ function animate(timeStamp) {
   jumper.update(input, enemyArray);
   handleEnemy(deltaTime);
 
-  if (!collision) requestAnimationFrame(animate);
+  scoreCard(ctx);
+  if (!collision) {
+    requestAnimationFrame(animate)
+    score++;
+  };
 }
 animate(0);
