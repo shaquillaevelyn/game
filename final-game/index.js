@@ -9,13 +9,13 @@ let score = 0
 let gameSpeed = 3;
 
 const background1 = new Image();
-background1.src = "/game-one/final-game/background/1.png";
+background1.src = "./background/1.png";
 
 const background2 = new Image();
-background2.src = "/game-one/final-game/background/2.png";
+background2.src = "./background/2.png";
 
 const background3 = new Image();
-background3.src = "/game-one/final-game/background/3.png";
+background3.src = "./background/3.png";
 
 class Inputs {
   constructor() {
