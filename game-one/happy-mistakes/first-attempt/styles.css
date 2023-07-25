@@ -1,0 +1,74 @@
+
+
+* {
+    padding: 0;
+    margin: 0;   
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+canvas {
+    width: 1000px;
+    height: 250px;
+    border: 5px solid navy;
+}
+
+#game{
+
+    border: 5px solid black;
+    object-fit: contain;
+    background-repeat: repeat-x;
+    z-index: -1;
+}
+
+
+#ball{
+    height: 50px;
+    width: 50px;
+    background-color: greenyellow;
+    border-radius: 50%;
+    position: relative;
+    top: 180px;
+    left: 10px;
+
+} 
+
+#scorecard {
+   top: 50px;
+    left: 10px; 
+}
+
+.jump{
+    animation: ball 0.5s linear;
+}
+
+@keyframes ball {
+    0%{top: 180px}
+    25%{top: 90px}
+    50%{top: 70px}
+    75%{top: 90px}
+    100%{top: 180px} 
+}
+
+#block{
+    height: 25px;
+    width: 25px;
+    background-color: black;
+
+    position: relative;
+    top: 160px;
+    animation: block 5s infinite linear;
+}
+
+@keyframes block {
+    0%{left: 1000px}
+    100%{left: -50px}
+
+}
+
