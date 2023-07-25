@@ -1,6 +1,13 @@
+"use client"
 import Image from 'next/image'
+import { useState } from "react"
+import { createPortal } from 'react-dom'
+import QuizModal from './modal/modal'
 
 export default function Home() {
+    const [show, setShow] = useState(false)
+    const onClick = () => setShow(!show)
+    
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -107,6 +114,15 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+        <div>
+          <a className="absolute bottom-0 right-0 mx-10 m-10 p-5 border-4 rounded-full" onClick={onClick}> SOUNDS QUIZ</a>
+        
+          
+          {show && createPortal(<>
+            <QuizModal/></>, document.body)}
+
+                        
+        </div>
       </div>
     </main>
   )
