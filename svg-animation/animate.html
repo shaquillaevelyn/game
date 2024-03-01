@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> SVG animate </title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <svg width="115" height="56" viewBox="0 0 115 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="stars">
+        <path id="pink-end-star" d="M87 0L93.2864 19.3475H113.63L97.1716 31.305L103.458 50.6525L87 38.695L70.542 50.6525L76.8284 31.305L60.3704 19.3475H80.7136L87 0Z" />
+
+        <path id="purple-start-star" d="M28 0L34.2864 19.3475H54.6296L38.1716 31.305L44.458 50.6525L28 38.695L11.542 50.6525L17.8284 31.305L1.37042 19.3475H21.7136L28 0Z" />
+    </g>
+        </svg>
+            
+        
+    <style >
+        :root {
+            --dark: #531d8a;
+            --light:#ab81d6;
+        }
+
+        svg{
+
+        }
+        #purple-start-star{
+            fill: var(--dark);
+            transform: translateX(0%)
+        }
+        #pink-end-star{
+            fill: var(--light);
+        }
+
+        #purple-start-star,
+        #pink-end-star{
+            transition: all 2s ease;
+        }
+
+        svg:hover #purple-start-star{
+            transform: translateX(50%);
+
+        }
+        #pink-end-star:hover{
+
+            position: relative;
+            rotate: z 360deg;
+            
+        }
+    
+    </style>
+</body>
+
+</html>
+
+

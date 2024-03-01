@@ -1,20 +1,37 @@
-import { BackButton, NextButton, ScoreCard } from "./buttons"
+import { BackButton, NextButton, ScoreCard, Start } from "./buttons"
+
+export interface QuizQuestions {
+    question: string;
+    number: number;
+    href?: string | null;
+    altText?: string | null;
+}
+
+export interface QuizAnswers{
+    answer: string;
+    correct: boolean;
+    number: number;
+    href?: string | null;
+    altText?: string | null;
+}
 
 export default function Quiz(){
     return (
         <>
             <ScoreCard/>
-            <section>
-                <h2>Test your Sounds knowledge from this week 🎵🎹🎤
-                    Are you ready?</h2>
+            <main>
+             <Questions />
+
           
-            </section>
-
-            <Questions />
-            
-
+            </main>
+            <section>
+            <Start/>
             <NextButton />
             <BackButton />
+
+            </section>
+
+
 
         </>
     )
@@ -23,9 +40,10 @@ export default function Quiz(){
 export function Questions() {
     return (
         <>
-            <h3>
 
-            </h3>
+                <h2 className="font-mono">Test your Sounds knowledge from this week 🎵🎹🎤
+                    Are you ready?</h2>
+
         </>
     )
 }
