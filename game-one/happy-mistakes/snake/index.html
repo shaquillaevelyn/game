@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- <html lang="en" onload="start()" onclick="jump()"> -->
-<html lang="en" onclick="jump()"></html>
+<html lang="en" ></html>
 <head>
     <meta charset="UTF-8">
     <title> snake </title>
@@ -10,13 +10,13 @@
 <body>
     <canvas width="5000" height="5000" id="canvas"  >
     <div id="game">
-        <!-- <div>score:  <span id="scorecard"></span>           <button>pause</button></div>
+       <div id="snake">
   
-        <div id="ball" ></div>
-        <div id="block"></div> -->
+        <div id="food" hidden=`${false}` ></div>
+
     </div>
     </canvas>
 </body>
-    <script src="snake.js" ></script>
+    <script type="module" src="snake.js" ></script>
 
 </html>
