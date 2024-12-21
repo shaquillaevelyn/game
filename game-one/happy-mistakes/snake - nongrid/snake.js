@@ -1,4 +1,5 @@
 import Inputs from "./inputs.js";
+// imports will only work if i have a server running.
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -37,7 +38,9 @@ class Snake {
 
     draw(){
         ctx.fillStyle = "orange";
+        // ctx.roundRect(this.x, this.y, this.width, this.height, [80])
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        // ctx.arc(this.x, this.y, 50, 0, Math.PI * 2)
         ctx.fill();  
     }
 
@@ -80,7 +83,9 @@ class Snake {
         // collisons
           if((this.x + this.width > food.xLocation ) && (this.x < food.xLocation + food.x) && (this.y + this.height > food.yLocation ) && (this.y < food.yLocation + food.y)){
             console.log('collision')
-            this.width += 60 // add length to the snake
+            // this is the level easy afro expansion logic
+            this.width += 1
+            this.height += 1 // add length to the snake
             // how to make it add the length just once?
             this.collision = true
             foodId.setAttribute('hidden', true)
@@ -144,7 +149,7 @@ const input = new Inputs()
 function animate(){
 //each second refresh
 
-ctx.clearRect(0, 0, canvas.width, canvas.height); 
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
     ctx.strokeRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
         food.draw()
         food.update() 
@@ -152,6 +157,6 @@ ctx.clearRect(0, 0, canvas.width, canvas.height);
         snake.update(input, food)
     requestAnimationFrame(animate);
 
-
 }
 animate()
+// setInterval(animate, 60)

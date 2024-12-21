@@ -1,0 +1,8 @@
+canvas{
+    border: 5px;
+    border-style: dotted;
+    border-color: brown;
+    margin: 10px;
+    top: 0;
+    position: absolute;
+}
